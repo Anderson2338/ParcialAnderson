@@ -48,6 +48,10 @@ public class GUIManual extends JFrame {
     private JPanel jPanelMenuHome;
     private JLabel btnHome;
     
+    private JPanel iniciarsesionpanel;
+    private JLabel sesionboton;
+
+    
     private JPanel jPanelMenuSelecciones;
     private JLabel btnSelecciones;
     
@@ -88,6 +92,11 @@ public class GUIManual extends JFrame {
     
     private void initComponents() {
 
+        iniciarsesionpanel =new JPanel();
+        
+        sesionboton = new JLabel();
+        
+        
         haySesion = false;   
         
         // Inicializamos componentes del Menu Lateral
@@ -127,8 +136,14 @@ public class GUIManual extends JFrame {
         // Pinta la opción de Menú del dashboard de equipo
         pintarMenuDashboardSel();
         
+        
+        
+        
+        
         // Pinta la opción de Menú del dahboard de resultados
         pintarMenuDashboardRes();
+        
+        pintarboton();
         
         // Pinta y ajuste diseño del contenedor del panel izquierdo
         pintarPanelIzquierdo();
@@ -187,6 +202,28 @@ public class GUIManual extends JFrame {
         });   
     }
     
+    
+    private void pintarboton() {
+        sesionboton.setIcon(new ImageIcon(getClass().getResource("/resources/icons/dashboard_selecciones.png")));
+        sesionboton.setText("iniciar sesion");
+        sesionboton.setForeground(new java.awt.Color(255, 255, 255));
+        
+        JLabel vacioDashboardSelecciones = new JLabel();
+        iniciarsesionpanel.setBackground(new java.awt.Color(17, 41, 63));
+        iniciarsesionpanel.setPreferredSize((new java.awt.Dimension(220, 35)));
+        iniciarsesionpanel.setLayout(new BorderLayout(15, 0));
+        iniciarsesionpanel.add(vacioDashboardSelecciones, BorderLayout.WEST);
+        iniciarsesionpanel.add(sesionboton, BorderLayout.CENTER);
+        jPanelMenu.add(iniciarsesionpanel);
+        
+        sesionboton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                System.out.println("sesion");
+               accionsesion();
+            }
+        });
+    }
+    
     /**
      * Función que se ejecuta cuando el usuario hacer click sobre la opción de navegación Home
      * Permite modificar la etiqueta de Navegación en Home, remover los elementos que hay en 
@@ -208,6 +245,32 @@ public class GUIManual extends JFrame {
         jPanelMain.add(homePanel, BorderLayout.CENTER);
         jPanelMain.repaint();
         jPanelMain.revalidate();
+    }
+    
+    
+    
+    private void accionsesion() {
+        
+        JLabel usuario = new JLabel();
+        
+        jLabelTop.setText("iniciarsesion");
+        selecciones = seleccionDAO.getSeleccionesMatriz();
+        
+           JPanel sesion = new JPanel();
+           sesion.setLayout(new BoxLayout(sesion,BoxLayout.Y_AXIS));
+           sesion.setPreferredSize(new java.awt.Dimension(620, 300));
+           sesion.setMaximumSize(jPanelRight.getPreferredSize());
+        
+
+            
+            jPanelMain.repaint();
+            jPanelMain.revalidate();
+            
+            jPanelMain.removeAll();
+            jPanelMain.add(sesion, BorderLayout.PAGE_START);
+        
+        // Si hay selecciones cargadas, llama el método que permite pintar la tabla de selecciones
+       
     }
     
     /**
