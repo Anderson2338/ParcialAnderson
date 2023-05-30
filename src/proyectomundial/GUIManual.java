@@ -251,7 +251,16 @@ public class GUIManual extends JFrame {
     
     private void accionsesion() {
         
-        JLabel usuario = new JLabel();
+        JLabel usua = new JLabel();
+        usua.setText("Usuario");
+        JLabel contra = new JLabel();
+        contra.setText("Contraseña");
+        JTextField usuario = new JTextField();
+        JTextField contraseña= new JTextField(); 
+        
+        
+        
+        
         
         jLabelTop.setText("iniciarsesion");
         selecciones = seleccionDAO.getSeleccionesMatriz();
@@ -260,6 +269,16 @@ public class GUIManual extends JFrame {
            sesion.setLayout(new BoxLayout(sesion,BoxLayout.Y_AXIS));
            sesion.setPreferredSize(new java.awt.Dimension(620, 300));
            sesion.setMaximumSize(jPanelRight.getPreferredSize());
+           
+           sesion.add(usua);
+           sesion.add(usuario);
+           sesion.add(contra);
+           sesion.add(contraseña);
+           
+           
+           JButton Iniciosesion = new JButton();
+           Iniciosesion.setText("iniciar sesion");
+           sesion.add(Iniciosesion);
         
 
             
